@@ -1,1 +1,52 @@
 /* Empty. Add your own CSS if you like */
+
+body {
+  background-color: #737373
+}
+
+.scroll-content{
+  background-color: transparent;
+}
+
+.bar.bar-stable {
+  background-color: transparent;
+  background: none;
+}
+
+.pane {
+  background-color: transparent;
+  margin-top: 10px;
+}
+
+.fa-user-circle {
+  color: white;
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  font-size: 2em;
+}
+
+.fa-bell {
+  background: #737373;
+  color: white;
+  font-size: 1.6em;
+}
+
+.notification {
+  right: 15px;
+  top: 25px;
+  position: absolute;
+}
+
+.circle {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  background: #FFB347;
+  border: 3px solid #737373;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  box-shadow: 1px 1px 5px rgba(115, 115, 115, 0.5);
+  outline: none;
+}
