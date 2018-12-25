@@ -1,7 +1,7 @@
 <ion-view ng-controller="NotificationsController" view-title="Notifications">
   <ion-content>
       <div ng-repeat="notification in notifications">
-        <div class="card-notification">
+        <div ng-click="getNotification(notification.id)" style="cursor: pointer;"  class="card-notification">
           <div class="circle-card-notification"></div>
           <p>{{notification.date}}</p>
           <h2>{{notification.title}}</h2>
