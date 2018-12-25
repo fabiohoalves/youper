@@ -1,0 +1,12 @@
+<ion-view ng-controller="NotificationsController" view-title="Notifications">
+  <ion-content>
+      <div ng-repeat="notification in notifications">
+        <div class="card-notification">
+          <div class="circle-card-notification"></div>
+          <p>{{notification.date}}</p>
+          <h2>{{notification.title}}</h2>
+          <h3>{{notification.description}}</h3>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>
