@@ -1,7 +1,12 @@
 <ion-view ng-controller="HomeController">
-      <i class="fas fa-user-circle"></i>
-      <div ng-click="getNotifications()" style="cursor: pointer;" class="notification">
-        <div class="circle"></div>
-        <i class="fas fa-bell"></i>
-      </div>
+  <div ng-if="isPhoto">
+    <img ng-click="choosePhoto()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
+  </div>
+  <div ng-if="!isPhoto">
+    <i ng-click="choosePhoto()" style="cursor: pointer;" class="fas fa-user-circle"></i>
+  </div>
+  <div ng-click="getNotifications()" style="cursor: pointer;" class="notification">
+      <div class="circle"></div>
+      <i class="fas fa-bell"></i>
+  </div>
 </ion-view>
