@@ -1,6 +1,6 @@
-# Project Title
+# Youper Challenge
 
-One Paragraph of project description goes here
+This challenge is to create some initial screens for an application
 
 ## Getting Started
 

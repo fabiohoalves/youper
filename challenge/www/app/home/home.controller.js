@@ -6,7 +6,7 @@ function HomeController($scope, $state, $cordovaCamera) {
   $scope.isPhoto = false;
 
   $scope.getNotifications = function() {
-    $state.go("notifications");
+    $state.go('notifications');
   }
 
   $scope.choosePhoto = function () {
@@ -23,7 +23,7 @@ function HomeController($scope, $state, $cordovaCamera) {
   };
 
   $cordovaCamera.getPicture(options).then(function (imageData) {
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      $scope.imgURI = 'data:image/jpeg;base64,' + imageData;
       $scope.isPhoto = true;
     }, function (err) {
           // An error occured. Show a message to the user
