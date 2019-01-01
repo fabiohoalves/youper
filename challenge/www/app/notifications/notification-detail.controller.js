@@ -1,8 +1,19 @@
 angular.module("notifications")
-.controller('NotificationDetailController', function($scope) {
-  $scope.notification =
-    {id: 1, title: "New feature 1!", description: "Now you can customize...",
-      information: "Just click on the avatar, take or select a picture and save",
-      image: null, route: "",  labelButton: "Got it", date: "10/12/2018", read: false};
-});
+.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', NotificationDetailController]);
+
+function NotificationDetailController ($scope, $state, $stateParams, CacheFactory) {
+
+    notificationsCache = CacheFactory.get('notificationsCache');
+
+    findNotification();
+
+    // procurar registro no cache
+    function findNotification() {
+        if (notificationsCache.get($stateParams.id) !== undefined){
+            $state.go("notifications");
+        }
+        return $scope.notification = notificationsCache.get($stateParams.id);
+    }
+
+}
 
