@@ -1,14 +1,13 @@
-<ion-view ng-controller="NotificationDetailController" view-title="Notification">
-  <ion-content>
-    <i class="fas fa-angle-left"></i>
-    <div class="card-notification card-notification-full">
-        <p>{{notification.date}}</p>
-        <h2>{{notification.title}}</h2>
-        <h3>{{notification.description}}</h3>
-        <h3>{{notification.information}}</h3>
-        <img class="item-img" src="../../img/example.png"/>
-        <button>{{notification.labelButton}}</button>
-    </div>
-  </ion-content>
+<ion-view class="main" has-header="true" padding="true">
+    <ion-content padding="true">
+        <i ng-click="getNotifications()" style="cursor: pointer;" class="fas fa-angle-left"></i>
+        <div class="card-notification card-notification-full">
+            <p>{{notification.date}}</p>
+            <h2>{{notification.title}}</h2>
+            <h3>{{notification.description}}</h3>
+            <h4>{{notification.information}}</h4>
+            <img class="item-img" src="../../img/example.png"/>
+            <button>{{notification.labelButton}}</button>
+        </div>
+    </ion-content>
 </ion-view>
-z

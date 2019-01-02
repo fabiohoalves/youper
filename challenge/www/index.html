@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
+
     <title>Youper - Challenge</title>
 
     <link rel="manifest" href="manifest.json">
@@ -16,23 +17,25 @@
           .catch(err => console.log('Error', err));
       }
     </script-->
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
     <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
     <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
-    <script src="lib/lodash/dist/lodash.min.js"></script>
+
+    <!-- md5 -->
+    <script src="lib/angular-md5/angular-md5.min.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
@@ -46,7 +49,9 @@
 
 
   </head>
+
+
   <body ng-app="starter">
-      <ion-nav-view></ion-nav-view>
+        <ion-nav-view></ion-nav-view>
   </body>
 </html>

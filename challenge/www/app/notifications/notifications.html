@@ -1,12 +1,13 @@
-<ion-view ng-controller="NotificationsController" view-title="Notifications">
-  <ion-content>
-      <div ng-repeat="notification in notifications">
-        <div ng-click="getNotificationDetail(notification)" style="cursor: pointer;"  class="card-notification">
-          <div class="circle-card-notification"></div>
-          <p>{{notification.date}}</p>
-          <h2>{{notification.title}}</h2>
-          <h3>{{notification.description}}</h3>
+<ion-view class="main" has-header="true" padding="true">
+    <ion-content padding="true">
+        <i ng-click="getHome()" class="fas fa-angle-left"></i>
+        <div ng-repeat="notification in notifications">
+            <div ng-click="getNotificationDetail(notification)"  class="card-notification" ng-class = "{'card-notification-read' : notification.read == true }">
+                <div ng-class= "{'circle-card-notification' : notification.read == false}"></div>
+                <p>{{notification.date}}</p>
+                <h2>{{notification.title}}</h2>
+                <h3>{{notification.description}}</h3>
+            </div>
         </div>
-      </div>
-  </ion-content>
+    </ion-content>
 </ion-view>

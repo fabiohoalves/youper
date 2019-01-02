@@ -1,93 +1,136 @@
 angular.module("notifications")
-.controller('NotificationsController', ['$scope', '$http', '$timeout', '$state', 'CacheFactory', NotificationsController]);
+.controller('NotificationsController', ['$scope', '$http', '$timeout', '$state', 'CacheFactory', 'md5', NotificationsController]);
 
+function NotificationsController($scope, $http, $timeout, $state, CacheFactory, md5) {
 
-function NotificationsController($scope, $http, $timeout, $state, CacheFactory) {
-
-    notificationsCache = CacheFactory.get('notificationsCache');
-
-    // Verificar se existe cache
     createCache();
 
-    getNotifications();
+    getNotificationsData();
 
-    // procurar registro no cache
     function findNotification(notificationId) {
+
+        var notificationsCache = CacheFactory.get('notificationsCache');
+
         if (notificationsCache.get(notificationId) == undefined){
             return false;
         }
         return true;
     }
 
-    // Incluir registro no cache
-    function addNotification(notification) {
-        if (!findNotification(notification.id)) {
-            notificationsCache.put(notification.id, notification);
-        }
+    function createHashMd5(notification) {
+        return md5.createHash(JSON.stringify(notification.id
+            || notification.title
+            || notification.description
+            || notification.information)
+            || '');
     }
 
-    // Deletar registro no cache
-    function removeNotification(notification) {
-        if (findNotification(notification.id)) {
+    function addNotificationsCache(notifications) {
+
+        var notificationsCache = CacheFactory.get('notificationsCache');
+
+        for(var i in notifications)
+        {
+            notification = notifications[i];
+            hash = createHashMd5(notification);
+
+            if (findNotification(notification.id)) {
+                if (hash != notificationsCache.get(notification.id).hash){
+                    removeNotification(notification.id);
+                } else {
+                    return;
+                }
+            }
+
+            notification.hash = hash;
+            notification.date = new Date();
+            notification.read = false;
+            notificationsCache.put(notification.id, notification);
+        }
+
+        recycleCache(notifications);
+    }
+
+    function removeNotification(notificationId) {
+
+        var notificationsCache = CacheFactory.get('notificationsCache');
+
+        if (findNotification(notificationId)) {
             notificationsCache.remove(notification.id.toString());
         }
     }
 
-    // Devolver array de cache
-    function getNotificationsData(notifications) {
+    function getNotificationsCache() {
+
+        var notificationsCache = CacheFactory.get('notificationsCache');
 
         notificationsData = [];
 
-        addCache(notifications)
-
-        for (var i in notifications) {
-            notificationsData.push(notificationsCache.get(notifications[i].id));
+        for (var i in notificationsCache.keySet()) {
+            notificationsData.push(notificationsCache.get(i));
         }
-
-        recycleCache();
 
         return notificationsData;
     }
 
-    function addCache(notifications) {
-        for(var i in notifications)
-        {
-           addNotification(notifications[i]);
+
+    function recycleCache(notifications) {
+
+        var notificationsCache = CacheFactory.get('notificationsCache');
+
+        if (notificationsCache == undefined || notifications == undefined)
+            return;
+
+        keys = notificationsCache.keys();
+        if (keys == undefined)
+            return;
+
+        for (var k of keys) {
+             found = false;
+
+             for (var j in notifications) {
+                 if (notificationsCache.get(k).id == notifications[j].id) {
+                     found = true;
+                 }
+             }
+
+             if (!found) {
+                removeNotification(notificationsCache.get(k));
+             }
         }
-    }
-
-    // Verificar se existe registro no cache que não existe no servidor
-
-    function recycleCache() {
-
     }
 
     function createCache() {
+
+        var notificationsCache = CacheFactory.get('notificationsCache');
+
         if (notificationsCache == undefined) {
             CacheFactory.createCache("notificationsCache", {storageMode: "localStorage", maxAge: 5000, deleteOnExpire: "aggressive"});
-            notificationsCache = CacheFactory.get('notificationsCache');
         }
     }
 
-    function getNotifications(){
+    function getNotificationsData(){
 
         $scope.reload = function () {
             $http.get('http://localhost:3000/notification').
                 success(function (data) {
-                    $scope.notifications = getNotificationsData(data);
+                    addNotificationsCache(data)
+                    $scope.notifications = getNotificationsCache();
             });
 
             $timeout(function(){
-            $scope.reload();
-            },3000)
+                $scope.reload();
+            },10000)
         };
 
         $scope.reload();
     }
 
-
     $scope.getNotificationDetail = function(notification) {
         $state.go("notification-detail", {id: notification.id});
     }
 
+    $scope.getHome = function() {
+        $state.go("home");
+    }
 }

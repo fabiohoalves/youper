@@ -1,21 +1,9 @@
 /* Empty. Add your own CSS if you like */
 
-body {
-  background-color: #737373;
-}
-
-.scroll-content{
-  background-color: transparent;
-}
 
 .bar.bar-stable {
   background-color: transparent;
   background: none;
-}
-
-.pane {
-  background-color: transparent;
-  margin-top: 10px;
 }
 
 .profile-img {
@@ -40,8 +28,9 @@ body {
 .fa-angle-left {
   position: relative;
   color: white;
-  top: 15px;
-  left: 15px;
+  top: 5px;
+  left: 10px;
+  bottom: 10px;
   font-size: 3em;
 }
 
@@ -71,16 +60,23 @@ body {
   outline: none;
 }
 
+.main{
+    background-color: #737373;
+}
+
 .card-notification{
-  margin-left: 35px;
+  margin-left: 10%;
+  padding: 5% 5% 5% 5%;
   position: relative;
   background-color: white;
-  width: 80%;
-  height: 100%;
-  margin-top: 40px;
+  margin-top: 5%;
   border-radius: 15px;
   width: 80%;
   height: 100%;
+}
+
+.card-notification-read {
+    background-color: #d9d9d9;
 }
 
 .circle-card-notification {
@@ -96,15 +92,11 @@ body {
 
 .card-notification p {
   position: relative;
-  left: 15px;
-  top: 10px;
   color: #acacac;
 }
 
 .card-notification h2 {
   position: relative;
-  left: 15px;
-  top: 10px;
   font-size: 1.5em;
   white-space: normal;
   color: #666666;
@@ -112,38 +104,44 @@ body {
 
 .card-notification h3 {
   position: relative;
-  left: 15px;
-  bottom: 5px;
   font-size: 1.2em;
   white-space: normal;
   color: #666666;
 }
 
+.card-notification h4 {
+    margin-top: 10%;
+    position: relative;
+    font-size: 1.2em;
+    white-space: normal;
+    color: #666666;
+  }
+
 .card-notification-full{
   position: relative;
+  padding: 5% 5% 5% 5%;
   width: 80%;
   height: 100%;
 }
 
 .card-notification-full img {
-  width: 85%;
-  margin: 30px 10px 10px 20px;
+  width: 100%;
+  margin-top: 5%;
   border-radius: 15px;
   display: block;
 }
 
 .card-notification-full button {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
   background: #FFB347;
   border-radius: 40px;
-  width: 160px;
-  height: 50px;
-  margin-left: 20%;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 140px;
+  height: 40px;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  margin-left: 22%;
   color: white;
+  border: 3px solid white;
   font-weight: bold;
   font-size: 1.2em;
-  align-items: center;
 }

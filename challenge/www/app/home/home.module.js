@@ -3,10 +3,12 @@ angular.module("home",[])
       $stateProvider
       .state('home', {
           url: "/home",
-          templateUrl: "app/home/home.html"
+          templateUrl: "app/home/home.html",
+          controller: 'HomeController'
       })
       .state('profile', {
         url: "/profile",
-        templateUrl: "app/home/profile.html"
+        templateUrl: "app/home/profile.html",
+        controller: 'HomeController'
     });
   });

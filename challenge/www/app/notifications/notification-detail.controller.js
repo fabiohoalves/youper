@@ -3,17 +3,25 @@ angular.module("notifications")
 
 function NotificationDetailController ($scope, $state, $stateParams, CacheFactory) {
 
-    notificationsCache = CacheFactory.get('notificationsCache');
+    var notificationCache = undefined;
+    var notificationsCache = CacheFactory.get('notificationsCache');
 
-    findNotification();
+    if (notificationsCache != undefined) {
+        notificationCache = notificationsCache.get($stateParams.id);
 
-    // procurar registro no cache
-    function findNotification() {
-        if (notificationsCache.get($stateParams.id) !== undefined){
-            $state.go("notifications");
+        if (notificationCache != undefined){
+            $scope.notification = notificationCache;
+            notificationCache.read = true;
+            notificationsCache.put(notificationCache.id, notificationCache);
+        } else {
+            $state.go("notifications")
         }
-        return $scope.notification = notificationsCache.get($stateParams.id);
+    } else {
+        $state.go("notifications")
     }
 
+    $scope.getNotifications = function() {
+        $state.go("notifications");
+    }
 }
 
