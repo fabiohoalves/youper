@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
-
     <title>Youper - Challenge</title>
 
     <link rel="manifest" href="manifest.json">
@@ -34,22 +33,35 @@
     <script src="cordova.js"></script>
     <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
 
-    <!-- md5 -->
-    <script src="lib/angular-md5/angular-md5.min.js"></script>
+
+    <!-- firebase & angularfire libraries -->
+    <script src="lib/angularfire/dist/angularfire.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAJMUm9iZRDh9KRch3HishOI00Ia-vgzdo",
+        authDomain: "youper-challenge.firebaseapp.com",
+        databaseURL: "https://youper-challenge.firebaseio.com",
+        projectId: "youper-challenge",
+        storageBucket: "youper-challenge.appspot.com",
+        messagingSenderId: "684503495517"
+      };
+      firebase.initializeApp(config);
+    </script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/app.routing.js"></script>
+    <script src="app/services/notification.service.js"></script>
     <script src="app/home/home.module.js"></script>
     <script src="app/home/home.controller.js"></script>
-    <script src="app/services/notification.service.js"></script>
     <script src="app/notifications/notifications.module.js"></script>
     <script src="app/notifications/notifications.controller.js"></script>
     <script src="app/notifications/notification-detail.controller.js"></script>
 
-
   </head>
-
 
   <body ng-app="starter">
         <ion-nav-view></ion-nav-view>

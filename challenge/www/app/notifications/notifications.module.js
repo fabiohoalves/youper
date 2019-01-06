@@ -10,6 +10,10 @@ angular.module("notifications",[])
       .state('notification-detail',{
         url: "/notifications/:id",
         templateUrl: "app/notifications/notification-detail.html",
-        controller: 'NotificationDetailController'
+        controller: 'NotificationDetailController',
+        params: {
+            obj: null,
+            date : null
+        }
       });
   });

@@ -1,136 +1,61 @@
 angular.module("notifications")
-.controller('NotificationsController', ['$scope', '$http', '$timeout', '$state', 'CacheFactory', 'md5', NotificationsController]);
+.controller('NotificationsController', ['$scope', '$state', '$ionicLoading', 'NotificationService', 'CacheFactory', NotificationsController]);
 
-function NotificationsController($scope, $http, $timeout, $state, CacheFactory, md5) {
+function NotificationsController($scope, $state, $ionicLoading,  NotificationService, CacheFactory) {
 
-    createCache();
+    var notificationsCache = CacheFactory.get('notificationsCache');
 
     getNotificationsData();
 
-    function findNotification(notificationId) {
-
-        var notificationsCache = CacheFactory.get('notificationsCache');
-
-        if (notificationsCache.get(notificationId) == undefined){
-            return false;
-        }
-        return true;
-    }
-
-    function createHashMd5(notification) {
-        return md5.createHash(JSON.stringify(notification.id
-            || notification.title
-            || notification.description
-            || notification.information)
-            || '');
-    }
-
-    function addNotificationsCache(notifications) {
-
-        var notificationsCache = CacheFactory.get('notificationsCache');
-
-        for(var i in notifications)
-        {
-            notification = notifications[i];
-            hash = createHashMd5(notification);
-
-            if (findNotification(notification.id)) {
-                if (hash != notificationsCache.get(notification.id).hash){
-                    removeNotification(notification.id);
-                } else {
-                    return;
-                }
-            }
-
-            notification.hash = hash;
-            notification.date = new Date();
-            notification.read = false;
-            notificationsCache.put(notification.id, notification);
-        }
-
-        recycleCache(notifications);
-    }
-
-    function removeNotification(notificationId) {
-
-        var notificationsCache = CacheFactory.get('notificationsCache');
-
-        if (findNotification(notificationId)) {
-            notificationsCache.remove(notification.id.toString());
-        }
-    }
-
-    function getNotificationsCache() {
-
-        var notificationsCache = CacheFactory.get('notificationsCache');
-
-        notificationsData = [];
-
-        for (var i in notificationsCache.keySet()) {
-            notificationsData.push(notificationsCache.get(i));
-        }
-
-        return notificationsData;
-    }
-
-
-    function recycleCache(notifications) {
-
-        var notificationsCache = CacheFactory.get('notificationsCache');
-
-        if (notificationsCache == undefined || notifications == undefined)
-            return;
-
-        keys = notificationsCache.keys();
-        if (keys == undefined)
-            return;
-
-        for (var k of keys) {
-             found = false;
-
-             for (var j in notifications) {
-                 if (notificationsCache.get(k).id == notifications[j].id) {
-                     found = true;
-                 }
-             }
-
-             if (!found) {
-                removeNotification(notificationsCache.get(k));
-             }
-        }
-    }
-
-    function createCache() {
-
-        var notificationsCache = CacheFactory.get('notificationsCache');
-
-        if (notificationsCache == undefined) {
-            CacheFactory.createCache("notificationsCache", {storageMode: "localStorage", maxAge: 5000, deleteOnExpire: "aggressive"});
-        }
-    }
-
     function getNotificationsData(){
 
-        $scope.reload = function () {
-            $http.get('http://localhost:3000/notification').
-                success(function (data) {
-                    addNotificationsCache(data)
-                    $scope.notifications = getNotificationsCache();
+        $ionicLoading.show();
+
+        var notificationsObject = NotificationService.getParent();
+
+        notificationsObject.$bindTo($scope, "data");
+
+        var notifications = NotificationService.getChildren("notifications");
+
+        notifications.$loaded().then(function() {
+
+            angular.forEach(notifications, function(value, key) {
+
+                addItemCache(key);
             });
 
-            $timeout(function(){
-                $scope.reload();
-            },10000)
-        };
+            $ionicLoading.hide();
 
-        $scope.reload();
+        });
+
     }
 
-    $scope.getNotificationDetail = function(notification) {
-        $state.go("notification-detail", {id: notification.id});
+    function getItemCache(key, value){
+        if (notificationsCache != undefined)
+            return notificationsCache.get(key)[value];
+        return '';
+    }
+
+    function addItemCache(key) {
+        if (notificationsCache != undefined && notificationsCache.get(key) == undefined) {
+            notificationsCache.put(key, {read : false, date : new Date()});
+        }
+    }
+
+    $scope.getNotificationDetail = function(key, notification, date) {
+        $state.go("notification-detail", {id: key, obj: notification, date: date});
     }
 
     $scope.getHome = function() {
         $state.go("home");
     }
+
+    $scope.isRead = function(key) {
+        return getItemCache(key, 'read');
+    }
+
+    $scope.getDate = function(key) {
+        return getItemCache(key, 'date');
+    }
+
 }

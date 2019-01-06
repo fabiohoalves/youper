@@ -1,8 +1,10 @@
 <ion-view class="main" has-header="true" padding="true">
     <ion-content padding="true">
-        <i ng-click="getNotifications()" style="cursor: pointer;" class="fas fa-angle-left"></i>
+        <div data-tap-disabled="true">
+            <img ng-click="getNotifications()" src="../../img/ic_arrow_left.png" class="img-arrow-left"></img>
+        </div>
         <div class="card-notification card-notification-full">
-            <p>{{notification.date}}</p>
+            <p>{{date}}</p>
             <h2>{{notification.title}}</h2>
             <h3>{{notification.description}}</h3>
             <h4>{{notification.information}}</h4>

@@ -1,27 +1,27 @@
 {
 
-  "notification" : [
-    {"id": 1,
+  "notifications" : {
+    "one" : {
      "title": "New feature 1!",
      "description": "Now you can customize your avatar uploading your selfie...",
      "information": "Just click on the avatar, take or select a picture and",
      "image": null,
      "route": "",
      "labelButton": "Got it"},
-     {"id": 2,
+     "two" : {
       "title": "New feature 2!",
       "description": "Now you can customize your avatar uploading your selfie...",
       "information": "Just click on the avatar, take or select a picture and",
       "image": null,
       "route": "",
       "labelButton": "Got it"},
-      {"id": 3,
+      "three" : {
         "title": "New feature 3!",
         "description": "Now you can customize your avatar uploading your selfie...",
         "information": "Just click on the avatar, take or select a picture and",
         "image": null,
         "route": "",
         "labelButton": "Got it"}
-  ]
+      }
 
 }

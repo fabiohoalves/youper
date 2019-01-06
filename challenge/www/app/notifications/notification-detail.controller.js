@@ -1,23 +1,20 @@
 angular.module("notifications")
-.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', NotificationDetailController]);
+.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', 'NotificationService', NotificationDetailController]);
 
-function NotificationDetailController ($scope, $state, $stateParams, CacheFactory) {
+function NotificationDetailController ($scope, $state, $stateParams, CacheFactory, NotificationService) {
 
-    var notificationCache = undefined;
     var notificationsCache = CacheFactory.get('notificationsCache');
 
-    if (notificationsCache != undefined) {
-        notificationCache = notificationsCache.get($stateParams.id);
+    if ($stateParams.obj == null) {
+        $stateParams.obj = NotificationService.getChild("notifications", $stateParams.id);
+    }
 
-        if (notificationCache != undefined){
-            $scope.notification = notificationCache;
-            notificationCache.read = true;
-            notificationsCache.put(notificationCache.id, notificationCache);
-        } else {
-            $state.go("notifications")
-        }
+    if (notificationsCache != undefined) {
+        notificationsCache.put($stateParams.id, {read : true, date : $stateParams.date});
+        $scope.notification = $stateParams.obj;
+        $scope.date = $stateParams.date;
     } else {
-        $state.go("notifications")
+        $state.go("notifications");
     }
 
     $scope.getNotifications = function() {
