@@ -3,18 +3,18 @@
         <div data-tap-disabled="true">
             <div ng-if="isBrowser">
                 <div ng-if="isPhoto">
-                    <img ng-click="getPhotoBrowser()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
+                    <img  id="imgPhotoBrowser" ng-click="getPhotoBrowser()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
                 </div>
                 <div ng-if="!isPhoto">
-                    <i id="imgPhoto" ng-click="getPhotoBrowser()" style="cursor: pointer;" class="fas fa-user-circle"></i>
+                    <i ng-click="getPhotoBrowser()" style="cursor: pointer;" class="fas fa-user-circle"></i>
                 </div>
             </div>
             <div ng-if="!isBrowser">
                 <div ng-if="isPhoto">
-                    <img ng-click="getPhoto()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
+                    <img id="imgPhotoDevice" ng-click="getPhoto()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
                 </div>
                 <div ng-if="!isPhoto">
-                    <i  ng-click="getPhoto()" style="cursor: pointer;" class="fas fa-user-circle"></i>
+                    <i ng-click="getPhoto()" style="cursor: pointer;" class="fas fa-user-circle"></i>
                 </div>
             </div>
         </div>

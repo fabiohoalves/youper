@@ -1,30 +1,56 @@
 angular.module("home")
-.controller('HomeController', ['$scope', '$state', '$cordovaCamera', '$ionicPlatform', 'UtilService', 'NotificationService', HomeController]);
+.controller('HomeController', ['$scope', '$state', '$cordovaCamera', '$ionicPlatform', '$ionicLoading', 'NotificationService', HomeController]);
 
-function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, UtilService, NotificationService) {
+function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, $ionicLoading, NotificationService) {
 
-    var reader = new FileReader();
     $scope.isPhoto = false;
 
-    $scope.getNotifications = function() {
-        $state.go('notifications');
+    var profilePath = 'profile/images/';
+    var storage = NotificationService.getStorage();
+
+    download();
+
+    function download(){
+        storage.ref().child(profilePath + "teste" + ".png").getDownloadURL().then(function(url) {
+            loadPhotoProfile(url);
+        }).catch(function(error) {
+            console.log(error);
+            // Handle any errors
+        });
+
+    }
+
+    function loadPhotoProfile(img){
+        $scope.$apply(function() {
+            $scope.imgURI = img;
+            $scope.isPhoto = true;
+        });
     }
 
     function handleFileSelect(evt) {
 
         var files = evt.target.files; // FileList object
-
         // use the 1st file from the list
         f = files[0];
 
+        var reader = new FileReader();
+        reader.readAsDataURL(f)
         // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-            };
-          })(f);
+        reader.onloadend = function(e) {
+            loadPhotoProfile(reader.result);
+            upload(photoProfile);
+        };
+    }
 
-          // Read in the image file as a data URL.
-          reader.readAsDataURL(f);
+    function upload(img) {
+        console.log(ionic.Platform.device().uuid);
+        var photoRef = storage.ref().child(profilePath + "teste" + ".png");
+        photoRef.putString(img, 'data_url').then(function(snapshot) {
+
+        }, function (err) {
+            // remove picture
+            // An error occured. Show a message to the use
+        });
     }
 
     $scope.getPhotoBrowser = function() {
@@ -32,19 +58,15 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, UtilServ
         input.addEventListener('change', handleFileSelect, false);
         input.type = 'file';
         input.click()
-
-        $scope.imgURI = reader.result;
-        $scope.isPhoto = true;
     }
 
     $scope.getPhoto = function () {
-
             var options = {
                 quality: 80,
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
+                encodingType: Camera.EncodingType.PNG,
                 targetWidth: 48,
                 targetHeight: 48,
                 popoverOptions: CameraPopoverOptions,
@@ -52,19 +74,20 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, UtilServ
             };
 
             $cordovaCamera.getPicture(options).then(function (imageData) {
-                $scope.imgURI = 'data:image/jpeg;base64,' + imageData;
-                $scope.isPhoto = true;
-                ref = NotificationService.getStorage();
+                loadPhotoProfile('data:image/png;base64,' + imageData);
+                upload(photoProfile);
             }, function (err) {
                 // An error occured. Show a message to the user
 
             });
-
     }
 
     $scope.isBrowser = function() {
         return $ionicPlatform.is('browser');
     }
 
+    $scope.getNotifications = function() {
+        $state.go('notifications');
+    }
 }
 

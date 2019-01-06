@@ -13,7 +13,7 @@ return {
             return $firebaseObject(ref.child(name).child(key));
         },
         getStorage: function() {
-            return firebase.storage().ref();
+            return firebase.storage();
         }
     }
 });
