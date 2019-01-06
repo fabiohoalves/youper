@@ -4,7 +4,7 @@
             <img ng-click="getHome()" src="../../img/ic_arrow_left.png" class="img-arrow-left"></img>
         </div>
         <div ng-repeat="(key,notification) in data.notifications" ng-model="notifications">
-            <div ng-click="getNotificationDetail(key, notification, getDate(key))"  class="card-notification" ng-class = "{'card-notification-read' : isRead(key) == true }">
+            <div ng-click="getNotificationDetail(key, notification)"  class="card-notification" ng-class = "{'card-notification-read' : isRead(key) == true }">
                 <div ng-class= "{'circle-card-notification' : isRead(key) == false}"></div>
                 <p>{{getDate(key)}}</p>
                 <h2>{{notification.title}}</h2>

@@ -12,8 +12,7 @@ angular.module("notifications",[])
         templateUrl: "app/notifications/notification-detail.html",
         controller: 'NotificationDetailController',
         params: {
-            obj: null,
-            date : null
+            notification: null
         }
       });
   });

@@ -42,8 +42,8 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
         }
     }
 
-    $scope.getNotificationDetail = function(key, notification, date) {
-        $state.go("notification-detail", {id: key, obj: notification, date: date});
+    $scope.getNotificationDetail = function(key, notification) {
+        $state.go("notification-detail", {id: key, notification: notification});
     }
 
     $scope.getHome = function() {
@@ -55,7 +55,7 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
     }
 
     $scope.getDate = function(key) {
-        return getItemCache(key, 'date');
+        return NotificationService.getDateString(getItemCache(key, 'date'));
     }
 
 }
