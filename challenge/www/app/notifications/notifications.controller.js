@@ -1,7 +1,7 @@
 angular.module("notifications")
-.controller('NotificationsController', ['$scope', '$state', '$ionicLoading', 'NotificationService', 'CacheFactory', NotificationsController]);
+.controller('NotificationsController', ['$scope', '$state', '$ionicLoading', 'NotificationService', 'UtilService', 'CacheFactory', NotificationsController]);
 
-function NotificationsController($scope, $state, $ionicLoading,  NotificationService, CacheFactory) {
+function NotificationsController($scope, $state, $ionicLoading,  NotificationService, UtilService, CacheFactory) {
 
     var notificationsCache = CacheFactory.get('notificationsCache');
 
@@ -55,7 +55,7 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
     }
 
     $scope.getDate = function(key) {
-        return NotificationService.getDateString(getItemCache(key, 'date'));
+        return UtilService.getDateString(getItemCache(key, 'date'));
     }
 
 }

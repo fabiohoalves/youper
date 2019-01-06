@@ -1,13 +1,21 @@
 <ion-view class="main" has-header="true" padding="true">
     <ion-content padding="true">
         <div data-tap-disabled="true">
-            <div ng-if="isPhoto">
-                <img ng-click="choosePhoto()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
+            <div ng-if="isBrowser">
+                <div ng-if="isPhoto">
+                    <img ng-click="getPhotoBrowser()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
+                </div>
+                <div ng-if="!isPhoto">
+                    <i id="imgPhoto" ng-click="getPhotoBrowser()" style="cursor: pointer;" class="fas fa-user-circle"></i>
+                </div>
             </div>
-        </div>
-        <div data-tap-disabled="true">
-            <div ng-if="!isPhoto">
-                <i ng-click="choosePhoto()" style="cursor: pointer;" class="fas fa-user-circle"></i>
+            <div ng-if="!isBrowser">
+                <div ng-if="isPhoto">
+                    <img ng-click="getPhoto()" ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="profile-img">
+                </div>
+                <div ng-if="!isPhoto">
+                    <i  ng-click="getPhoto()" style="cursor: pointer;" class="fas fa-user-circle"></i>
+                </div>
             </div>
         </div>
         <div data-tap-disabled="true">

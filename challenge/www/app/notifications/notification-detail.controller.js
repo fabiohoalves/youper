@@ -1,5 +1,5 @@
 angular.module("notifications")
-.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', 'NotificationService', NotificationDetailController]);
+.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', 'UtilService', 'NotificationService', NotificationDetailController]);
 
 function NotificationDetailController ($scope, $state, $stateParams, CacheFactory, NotificationService) {
 
@@ -17,7 +17,7 @@ function NotificationDetailController ($scope, $state, $stateParams, CacheFactor
 
         $scope.notification = $stateParams.notification;
 
-        $scope.date = NotificationService.getDateString(date);
+        $scope.date = UtilService.getDateString(date);
 
     } else {
         $state.go("notifications");
