@@ -1,7 +1,7 @@
 angular.module("notifications")
 .controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', 'UtilService', 'NotificationService', NotificationDetailController]);
 
-function NotificationDetailController ($scope, $state, $stateParams, CacheFactory, NotificationService) {
+function NotificationDetailController ($scope, $state, $stateParams, CacheFactory, UtilService, NotificationService) {
 
     var notificationsCache = CacheFactory.get('notificationsCache');
 

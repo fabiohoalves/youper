@@ -7,6 +7,7 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
 
     getNotificationsData();
 
+
     function getNotificationsData(){
 
         $ionicLoading.show();
@@ -57,5 +58,4 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
     $scope.getDate = function(key) {
         return UtilService.getDateString(getItemCache(key, 'date'));
     }
-
 }
