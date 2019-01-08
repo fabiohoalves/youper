@@ -3,7 +3,7 @@
         <div data-tap-disabled="true">
             <img ng-click="getNotifications()" src="../../img/ic_arrow_left.png" class="img-arrow-left"></img>
         </div>
-        <div class="card-notification card-notification-full">
+        <div class="card-notification card-notification-full" ng-model="notification">
             <p>{{date}}</p>
             <h2>{{notification.title}}</h2>
             <h3>{{notification.description}}</h3>

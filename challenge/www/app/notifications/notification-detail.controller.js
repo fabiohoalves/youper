@@ -1,27 +1,25 @@
 angular.module("notifications")
-.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'CacheFactory', 'UtilService', 'NotificationService', NotificationDetailController]);
+.controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'UtilService', 'NotificationService', NotificationDetailController]);
 
-function NotificationDetailController ($scope, $state, $stateParams, CacheFactory, UtilService, NotificationService) {
+function NotificationDetailController ($scope, $state, $stateParams, UtilService, NotificationService) {
 
-    var notificationsCache = CacheFactory.get('notificationsCache');
+    var notification = new Object();
 
-    if ($stateParams.notification == null) {
-        $stateParams.notification = NotificationService.getChild("notifications", $stateParams.id);
-    }
+    var currentDate = NotificationService.getValueCache($stateParams.id, 'date');
 
-    date = notificationsCache.get($stateParams.id)['date'];
+    $scope.date = UtilService.getDateString(currentDate);
 
-    if (notificationsCache != undefined) {
-
-        notificationsCache.put($stateParams.id, {read : true, date : date});
-
-        $scope.notification = $stateParams.notification;
-
-        $scope.date = UtilService.getDateString(date);
-
-    } else {
+    NotificationService.getChild("notifications", $stateParams.id).$loaded().then(function(child) {
+        child.forEach(function(item) {
+           notification[item.$id] = item.$value;
+        })
+    }).catch(function(error) {
         $state.go("notifications");
-    }
+    });
+
+    $scope.notification = notification;
+
+    NotificationService.updateItemCache($stateParams.id, currentDate, true);
 
     $scope.getNotifications = function() {
         $state.go("notifications");

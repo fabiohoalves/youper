@@ -3,10 +3,10 @@
         <div data-tap-disabled="true">
             <img ng-click="getHome()"  id="idimage" src="../../img/ic_arrow_left.png" class="img-arrow-left"></img>
         </div>
-        <div ng-repeat="(key,notification) in data.notifications" ng-model="notifications">
-            <div ng-click="getNotificationDetail(key, notification)"  class="card-notification" ng-class = "{'card-notification-read' : isRead(key) == true }">
-                <div ng-class= "{'circle-card-notification' : isRead(key) == false}"></div>
-                <p>{{getDate(key)}}</p>
+        <div ng-repeat="notification in notifications" ng-model="notifications">
+            <div ng-click="getNotificationDetail(notification)"  class="card-notification" ng-class = "{'card-notification-read' : isRead(notification.$id) == true }">
+                <div ng-class= "{'circle-card-notification' : isRead(notification.$id) == false}"></div>
+                <p>{{getDate(notification.$id)}}</p>
                 <h2>{{notification.title}}</h2>
                 <h3>{{notification.description}}</h3>
             </div>

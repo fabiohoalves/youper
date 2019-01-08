@@ -20,7 +20,9 @@
         </div>
         <div data-tap-disabled="true">
             <div ng-click="getNotifications()" style="cursor: pointer;" class="notification">
-                <div class="circle"></div>
+                <div ng-if="hasNotificationToRead()">
+                    <div class="circle"></div>
+                </div>
                 <i class="fas fa-bell"></i>
             </div>
         </div>

@@ -1,12 +1,12 @@
 angular.module("home")
-.controller('HomeController', ['$scope', '$state', '$cordovaCamera', '$ionicPlatform', '$ionicLoading', 'NotificationService', HomeController]);
+.controller('HomeController', ['$scope', '$state', '$cordovaCamera', '$ionicPlatform', 'NotificationService', HomeController]);
 
-function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, $ionicLoading, NotificationService) {
-
-    $scope.isPhoto = false;
+function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, NotificationService) {
 
     var profilePath = 'profile/images/';
     var storage = NotificationService.getStorage();
+
+    $scope.isPhoto = false;
 
     download();
 
@@ -88,6 +88,10 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, $ionicLo
 
     $scope.getNotifications = function() {
         $state.go('notifications');
+    }
+
+    $scope.hasNotificationToRead = function () {
+        return NotificationService.hasNotificationToRead();
     }
 }
 

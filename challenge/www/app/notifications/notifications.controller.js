@@ -1,61 +1,35 @@
 angular.module("notifications")
-.controller('NotificationsController', ['$scope', '$state', '$ionicLoading', 'NotificationService', 'UtilService', 'CacheFactory', NotificationsController]);
+.controller('NotificationsController', ['$scope', '$state', '$ionicLoading', 'NotificationService', 'UtilService', NotificationsController]);
 
-function NotificationsController($scope, $state, $ionicLoading,  NotificationService, UtilService, CacheFactory) {
+function NotificationsController($scope, $state, $ionicLoading,  NotificationService, UtilService) {
 
-    var notificationsCache = CacheFactory.get('notificationsCache');
+    getNotifications();
 
-    getNotificationsData();
-
-
-    function getNotificationsData(){
+    function getNotifications(){
 
         $ionicLoading.show();
 
-        var notificationsObject = NotificationService.getParent();
+        $scope.notifications =  NotificationService.getChildren("notifications");
 
-        notificationsObject.$bindTo($scope, "data");
-
-        var notifications = NotificationService.getChildren("notifications");
-
-        notifications.$loaded().then(function() {
-
-            angular.forEach(notifications, function(value, key) {
-
-                addItemCache(key);
-            });
-
+        $scope.notifications.$loaded().then(function() {
             $ionicLoading.hide();
-
         });
-
     }
 
-    function getItemCache(key, value){
-        if (notificationsCache != undefined)
-            return notificationsCache.get(key)[value];
-        return '';
-    }
-
-    function addItemCache(key) {
-        if (notificationsCache != undefined && notificationsCache.get(key) == undefined) {
-            notificationsCache.put(key, {read : false, date : new Date()});
-        }
-    }
-
-    $scope.getNotificationDetail = function(key, notification) {
-        $state.go("notification-detail", {id: key, notification: notification});
+    $scope.getNotificationDetail = function(notification) {
+        $state.go("notification-detail", {id: notification.$id, notification: notification});
     }
 
     $scope.getHome = function() {
         $state.go("home");
     }
 
-    $scope.isRead = function(key) {
-        return getItemCache(key, 'read');
+    $scope.isRead = function(id) {
+        return NotificationService.getValueCache(id, 'read');
     }
 
-    $scope.getDate = function(key) {
-        return UtilService.getDateString(getItemCache(key, 'date'));
+    $scope.getDate = function(id) {
+        return UtilService.getDateString(NotificationService.getValueCache(id, 'date'));
     }
+
 }
