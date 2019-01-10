@@ -4,17 +4,6 @@
 module.exports = function(config) {
   config.set({
 
-
-    specReporter: {
-      maxLogLines: 5,             // limit number of lines logged per test
-      suppressErrorSummary: true, // do not print error summary
-      suppressFailed: false,      // do not print information about failed tests
-      suppressPassed: false,      // do not print information about passed tests
-      suppressSkipped: true,      // do not print information about skipped tests
-      showSpecTiming: false,      // print the time elapsed for each spec
-      failFast: true              // test would finish with error when a first fail occurs.
-    },
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -34,10 +23,16 @@ module.exports = function(config) {
         'lib/angular-ui-router/release/angular-ui-router.js',
         'lib/angular-mocks/angular-mocks.js',
 
+
+        'lib/angularfire/dist/angularfire.min.js',
+        'lib/firebase/firebase.js',
+
         'app/app.js',
         'app/app.routing.js',
+        'app/services/notification.service.js',
         'app/home/home.module.js',
         'app/home/home.controller.js',
+
         'tests/*.spec.js'
     ],
 
