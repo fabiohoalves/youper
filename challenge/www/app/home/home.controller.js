@@ -17,7 +17,6 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, Notifica
             console.log(error);
             // Handle any errors
         });
-
     }
 
     function loadPhotoProfile(img){
@@ -31,10 +30,11 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, Notifica
 
         var files = evt.target.files; // FileList object
         // use the 1st file from the list
-        f = files[0];
+        var f = files[0];
 
         var reader = new FileReader();
         reader.readAsDataURL(f)
+
         // Closure to capture the file information.
         reader.onloadend = function(e) {
             loadPhotoProfile(reader.result);
@@ -43,7 +43,6 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, Notifica
     }
 
     function upload(img) {
-        console.log(ionic.Platform.device().uuid);
         var photoRef = storage.ref().child(profilePath + "teste" + ".png");
         photoRef.putString(img, 'data_url').then(function(snapshot) {
 

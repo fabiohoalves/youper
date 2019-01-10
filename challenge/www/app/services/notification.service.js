@@ -10,7 +10,6 @@ angular.module('services', ['firebase'])
 
     var notificationsCache = CacheFactory.get('notificationsCache');
     var ref = firebase.database().ref();
-    var notificationToRead = false;
 
     $firebaseArray(ref.child('notifications').orderByKey()).$watch(function(event) {
         if(event.event == evt.ADDED){
@@ -55,9 +54,6 @@ angular.module('services', ['firebase'])
     }
 
 return {
-        getParent: function(){
-            return $firebaseArray(ref);
-        },
         getChildren: function(name){
             return $firebaseArray(ref.child(name).orderByKey());
         },

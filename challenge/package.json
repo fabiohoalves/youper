@@ -8,9 +8,9 @@
     ]
   },
   "scripts": {
-    "prepush": "npm run www/test:coverage",
-    "test": "./node_modules/.bin/mocha www/tests/**/*.spec.js --require babel-register --watch",
-    "test_coverage": "./node_modules/.bin/nyc npm test"
+    "test": "./node_modules/.bin/mocha www/tests/**/*.spec.js --require babel-register",
+    "test:tdd": "./node_modules/.bin/mocha www/tests/**/*.spec.js --require babel-register --watch",
+    "test:coverage": "nyc npm test"
   },
   "devDependencies": {
     "@ionic/v1-toolkit": "^1.0.0",
@@ -19,21 +19,23 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "bower": "^1.8.4",
-    "chai": "^4.2.0",
     "gulp": "^3.5.6",
     "gulp-clean-css": "^3.7.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^3.1.0",
-    "gulp-tsc": "^1.3.2",
-    "json-server": "^0.14.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
-    "sinon": "^7.2.2",
-    "sinon-chai": "^3.3.0",
-    "typescript": "^3.2.2",
+    "jasmine-core": "^3.3.0",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-spec-reporter": "0.0.32",
+    "ng-midway-tester": "^2.0.5",
+    "phantomjs": "^2.1.7",
     "webpack": "^4.28.2"
   },
   "dependencies": {
+    "angular-uuid": "0.0.4",
     "angularfire": "^2.3.0",
     "com-badrit-base64": "git+https://github.com/hazemhagrass/phonegap-base64.git",
     "cordova-android": "7.1.4",
@@ -46,8 +48,8 @@
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "fcm": "^1.0.3",
-    "firebase": "^5.7.2"
+    "firebase": "^5.7.2",
+    "node": "^11.6.0"
   },
   "cordova": {
     "plugins": {

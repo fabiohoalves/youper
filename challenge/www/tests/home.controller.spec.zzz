@@ -1,0 +1,26 @@
+describe("HomeController", function() {
+    var scope,controller,stateParams;
+
+    beforeEach(module('starter'));
+
+    it('should have a VideosCtrl controller', function() {
+        expect(starter.HomeController).not.to.equal(null);
+    });
+
+    // TODO: Instantiate the Controller and Mocks
+   // beforeEach(inject(function($controller,$rootScope) {
+   //     scope = $rootScope.$new();
+    //    stateParams = { name : 'user' }; //mock the stateParams value
+   //     controller = $controller("HomeController", { $scope: scope});
+
+  //  }));
+
+    it('should have a scope variable', function() {
+        expect(scope).toBeDefined();
+    });
+
+    it('should have controller initialized', function() {
+        expect(controller).toBeDefined();
+    });
+
+});
