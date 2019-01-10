@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var cleanCss = require('gulp-clean-css');
 var rename = require('gulp-rename');
-var karma = require('karma').server;
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -27,6 +26,3 @@ gulp.task('sass', function(done) {
 gulp.task('watch', ['sass'], function() {
   gulp.watch(paths.sass, ['sass']);
 });
-
-  //Register the task as DEFUALT
-  grunt.registerTask('default', ['blanket_mocha']);
