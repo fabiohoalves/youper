@@ -1,11 +1,12 @@
+(function () {
+    'use strict';
+
 angular.module("notifications")
 .controller('NotificationsController', ['$scope', '$state', '$ionicLoading', 'NotificationService', 'UtilService', NotificationsController]);
 
 function NotificationsController($scope, $state, $ionicLoading,  NotificationService, UtilService) {
 
-    getNotifications();
-
-    function getNotifications(){
+    $scope.getNotifications = function() {
 
         $ionicLoading.show();
 
@@ -15,6 +16,8 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
             $ionicLoading.hide();
         });
     }
+
+    $scope.getNotifications();
 
     $scope.getNotificationDetail = function(notification) {
         $state.go("notification-detail", {id: notification.$id, notification: notification});
@@ -33,3 +36,4 @@ function NotificationsController($scope, $state, $ionicLoading,  NotificationSer
     }
 
 }
+})()
