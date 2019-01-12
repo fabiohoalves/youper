@@ -1,10 +1,3 @@
-angular.module('starter')
-
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
-
-    // it can't be home because home is abstract
-  // home.leagues is part of the myHome module
-  $urlRouterProvider.otherwise('/home');
 
   // Initialize Firebase
   var config = {
@@ -15,7 +8,4 @@ angular.module('starter')
     storageBucket: "youper-challenge.appspot.com",
     messagingSenderId: "684503495517"
   };
-  if (!firebase.apps.length) { firebase.initializeApp(config);}
-
-
-});
+ firebase.initializeApp(config);

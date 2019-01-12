@@ -1,3 +1,6 @@
+(function () {
+    'use strict';
+
 angular.module("notifications")
 .controller('NotificationDetailController', ['$scope', '$state', '$stateParams', 'UtilService', 'NotificationService', NotificationDetailController]);
 
@@ -25,4 +28,4 @@ function NotificationDetailController ($scope, $state, $stateParams, UtilService
         $state.go("notifications");
     }
 }
-
+})();

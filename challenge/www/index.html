@@ -33,25 +33,11 @@
     <script src="cordova.js"></script>
     <script src="lib/angular-cache/dist/angular-cache.min.js"></script>
 
-    <script src="lib/angular-mocks/angular-mocks.js"></script>
-
-
     <!-- firebase & angularfire libraries -->
     <script src="lib/angularfire/dist/angularfire.min.js"></script>
     <script src="lib/firebase/firebase.js"></script>
 
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAJMUm9iZRDh9KRch3HishOI00Ia-vgzdo",
-        authDomain: "youper-challenge.firebaseapp.com",
-        databaseURL: "https://youper-challenge.firebaseio.com",
-        projectId: "youper-challenge",
-        storageBucket: "youper-challenge.appspot.com",
-        messagingSenderId: "684503495517"
-      };
-      firebase.initializeApp(config);
-    </script>
+    <script src="app/firebase.key.js"></script>
 
     <!-- your app's js -->
     <script src="app/app.js"></script>

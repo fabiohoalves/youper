@@ -1,4 +1,4 @@
-angular.module("notifications",[])
+angular.module("notifications", ['ui.router'])
   .config(function($stateProvider, $urlRouterProvider){
       $stateProvider
       .state('notifications', {

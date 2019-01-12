@@ -1,23 +1,39 @@
-angular.module("home")
-.controller('HomeController', ['$scope', '$state', '$cordovaCamera', '$ionicPlatform', 'NotificationService', HomeController]);
+(function () {
+    'use strict';
 
-function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, NotificationService) {
+angular.module("home")
+.controller('HomeController', ['$scope', '$state', 'NotificationService', '$cordovaCamera', '$ionicPlatform', '$log', HomeController]);
+
+function HomeController($scope, $state, NotificationService, $cordovaCamera, $ionicPlatform, $log) {
 
     var profilePath = 'profile/images/';
     var storage = NotificationService.getStorage();
+   // var hash = uuid.v4();
 
     $scope.isPhoto = false;
+    $scope.$log = null;
 
-    download();
+    $scope.isBrowser = function() {
+        return $ionicPlatform.is('browser');
+    }
 
-    function download(){
-        storage.ref().child(profilePath + "teste" + ".png").getDownloadURL().then(function(url) {
+    $scope.getName = function() {
+        if ($scope.isBrowser()) {
+            return 'teste';
+        } else {
+            return ionic.Platform.device();
+        }
+    }
+
+    $scope.download = function(){
+        storage.ref().child(profilePath + $scope.getName() + ".png").getDownloadURL().then(function(url) {
             loadPhotoProfile(url);
         }).catch(function(error) {
-            console.log(error);
-            // Handle any errors
+            $scope.$log = error;
         });
     }
+
+    $scope.download();
 
     function loadPhotoProfile(img){
         $scope.$apply(function() {
@@ -38,17 +54,16 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, Notifica
         // Closure to capture the file information.
         reader.onloadend = function(e) {
             loadPhotoProfile(reader.result);
-            upload(photoProfile);
+            $scope.upload(reader.result);
         };
     }
 
-    function upload(img) {
-        var photoRef = storage.ref().child(profilePath + "teste" + ".png");
+    $scope.upload = function(img) {
+        var photoRef = storage.ref().child(profilePath + $scope.getName() + ".png");
         photoRef.putString(img, 'data_url').then(function(snapshot) {
 
         }, function (err) {
-            // remove picture
-            // An error occured. Show a message to the use
+            $scope.$log = err;
         });
     }
 
@@ -74,18 +89,13 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, Notifica
 
             $cordovaCamera.getPicture(options).then(function (imageData) {
                 loadPhotoProfile('data:image/png;base64,' + imageData);
-                upload(photoProfile);
+                $scope.upload('data:image/png;base64,' + imageData);
             }, function (err) {
-                // An error occured. Show a message to the user
-
+                $scope.$log = err;
             });
     }
 
-    $scope.isBrowser = function() {
-        return $ionicPlatform.is('browser');
-    }
-
-    $scope.getNotifications = function() {
+    $scope.goToNotifications = function() {
         $state.go('notifications');
     }
 
@@ -93,4 +103,4 @@ function HomeController($scope, $state, $cordovaCamera, $ionicPlatform, Notifica
         return NotificationService.hasNotificationToRead();
     }
 }
-
+})();

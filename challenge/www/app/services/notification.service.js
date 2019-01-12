@@ -1,5 +1,10 @@
+(function () {
+    'use strict';
+
 angular.module('services', ['firebase'])
-.factory('NotificationService', function ($firebaseArray, CacheFactory) {
+.service('NotificationService', ['$firebaseArray', 'CacheFactory', NotificationService])
+
+function NotificationService($firebaseArray, CacheFactory) {
 
     var evt = {
         ADDED: 'child_added',
@@ -11,7 +16,11 @@ angular.module('services', ['firebase'])
     var notificationsCache = CacheFactory.get('notificationsCache');
     var ref = firebase.database().ref();
 
-    $firebaseArray(ref.child('notifications').orderByKey()).$watch(function(event) {
+    // use when need remove all register of storage
+   // removeAll()
+
+
+    var controlItemns = function(event) {
         if(event.event == evt.ADDED){
             addItemCache(event.key);
         }else if (event.event == evt.REMOVED || event.event == evt.MOVED){
@@ -20,11 +29,15 @@ angular.module('services', ['firebase'])
             updateItemCache(event.key, new Date(), false);
         }
         hasNotificationToRead();
-    })
+    };
+
+    if ($firebaseArray(ref.child('notifications').orderByKey()) != undefined) {
+        $firebaseArray(ref.child('notifications').orderByKey()).$watch(controlItemns);
+    }
 
     function hasNotificationToRead() {
         // when add items in cache, verify if there are items not read
-        count = notificationsCache.values().map(x => x.read).filter(isRead => isRead == false);
+        var count = notificationsCache.values().map(x => x.read).filter(isRead => isRead == false);
         return count.length > 0;
     }
 
@@ -33,25 +46,27 @@ angular.module('services', ['firebase'])
     }
 
     function addItemCache(key) {
-        if (!hasItemCache) {
+        if (!hasItemCache(key))
             notificationsCache.put(key, {read : false, date : new Date()});
-        }
     }
 
     function getValueCache(key, name) {
-        if (hasItemCache(key)) {
+        if (hasItemCache(key))
             return notificationsCache.get(key)[name];
-        }
     }
 
     function removeItemCache(key) {
-        if (hasItemCache(key))
-            notificationsCache.remove(key);
+        if (hasItemCache(key)) notificationsCache.remove(key);
     }
 
     function updateItemCache(key, date, isRead) {
         notificationsCache.put(key, {read : isRead, date : date});
     }
+
+    function removeAll(){
+        return notificationsCache.removeAll();
+    }
+
 
 return {
         getChildren: function(name){
@@ -63,9 +78,12 @@ return {
         getStorage: function() {
             return firebase.storage();
         },
+
         hasNotificationToRead: hasNotificationToRead,
         getValueCache: getValueCache,
-        updateItemCache: updateItemCache
+        hasItemCache: hasItemCache,
+        updateItemCache: updateItemCache,
+        addItemCache: addItemCache
     }
-});
-
+};
+})()
