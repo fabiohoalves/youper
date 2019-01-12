@@ -2,13 +2,12 @@
     'use strict';
 
 angular.module("home")
-.controller('HomeController', ['$scope', '$state', 'NotificationService', '$cordovaCamera', '$ionicPlatform', '$log', HomeController]);
+.controller('HomeController', ['$scope', '$state', 'NotificationService', '$cordovaCamera', '$ionicPlatform',  HomeController]);
 
-function HomeController($scope, $state, NotificationService, $cordovaCamera, $ionicPlatform, $log) {
+function HomeController($scope, $state, NotificationService, $cordovaCamera, $ionicPlatform) {
 
     var profilePath = 'profile/images/';
     var storage = NotificationService.getStorage();
-   // var hash = uuid.v4();
 
     $scope.isPhoto = false;
     $scope.$log = null;
@@ -18,12 +17,13 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
     }
 
     $scope.getName = function() {
-        if ($scope.isBrowser()) {
-            return 'teste';
+        if(ionic.Platform.device().uuid == undefined) {
+            return 'browser';
         } else {
-            return ionic.Platform.device();
+            return ionic.Platform.device().uuid;
         }
     }
+
 
     $scope.download = function(){
         storage.ref().child(profilePath + $scope.getName() + ".png").getDownloadURL().then(function(url) {

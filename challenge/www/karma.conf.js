@@ -17,21 +17,24 @@ module.exports = function(config) {
          // for test modules
         //'../node_modules/ng-midway-tester/src/ngMidwayTester.js',
 
+        'lib/ionic/js/ionic.bundle.js',
         'lib/angular/angular.js',
-        'lib/angular-animate/angular-animate.js',
-        'lib/angular-sanitize/angular-sanitize.js',
-        'lib/angular-ui-router/release/angular-ui-router.js',
-        'lib/angular-mocks/angular-mocks.js',
-
-
+        'lib/angular-animate/angular-animate.min.js',
+        'lib/angular-sanitize/angular-sanitize.min.js',
+        'lib/angular-ui-router/release/angular-ui-router.min.js',
+        'lib/angular-cache/dist/angular-cache.min.js',
         'lib/angularfire/dist/angularfire.min.js',
         'lib/firebase/firebase.js',
 
+        'app/firebase.key.js',
+
+        'lib/angular-mocks/angular-mocks.js',
         'app/app.js',
         'app/app.routing.js',
         'app/services/notification.service.js',
         'app/home/home.module.js',
         'app/home/home.controller.js',
+        'app/utils/util.service.js',
 
         'tests/*.spec.js'
     ],

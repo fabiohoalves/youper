@@ -1,7 +1,7 @@
 describe("Testing Modules", function() {
     var md;
     beforeEach(function() {
-        md = angular.module("home");
+        md = angular.module("starter");
     });
     describe("starter Module:", function() {
         it("should be registered", function() {

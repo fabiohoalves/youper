@@ -8,7 +8,7 @@ angular.module('starter', ['ionic','ngCordova', 'home', 'notifications', 'servic
 
 
 .run(function($ionicPlatform, CacheFactory) {
-  $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
     // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
