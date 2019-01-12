@@ -1,90 +1,73 @@
 # Youper Challenge
 
-This challenge is to create some initial screens for an application
+Project on developmemt challenge 
 
-## Getting Started
+## Using this project
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Install
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
+```bash
+#download of project
+git clone https://github.com/fabiohoalves/youper
+cd youper/challenge/
 ```
 
-### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
+```bash
+#install ionic and cordova
+npm install -g ionic cordova
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-* use json-server to fake Api tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```bash
+#install of project packages
+npm install
 ```
 
-### And coding style tests
+### Run App
 
-Explain what these tests test and why
+You can run the app in different ways:
 
+```bash
+#configure platform targets
+ionic platform add ios android
 ```
-Give an example
+
+```bash
+#locally build app for a platform
+ionic build ios 
+ionic build android
 ```
 
-## Deployment
+```bash
+#emulate app in simulator
+ionic emulate ios 
+ionic emulate android
+```
 
-Add additional notes about how to deploy this on a live system
+```bash
+#run app on emulate
+ionic run ios
+ionic run android 
+```
 
-## Built With
+```bash
+#run app on device
+ionic run ios  --device
+ionic run android  --device
+```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+```bash
+# run app on local browser
+ionic serve (localhost:8100)
+```
 
-## Contributing
+## Author
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Fabio Alves** - *Initial work* - [fabiohoalves](https://github.com/fabiohoalves)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
