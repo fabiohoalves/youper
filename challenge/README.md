@@ -14,8 +14,8 @@ cd youper/challenge/
 
 
 ```bash
-#install ionic and cordova
-npm install -g ionic cordova
+#install ionic and cordova and karma
+npm install -g ionic cordova and karma
 ```
 
 ```bash
@@ -29,37 +29,36 @@ You can run the app in different ways:
 
 ```bash
 #configure platform targets
-ionic platform add ios android
+ionic cordova platform add ios android
 ```
-
 ```bash
-#locally build app for a platform
-ionic build ios 
-ionic build android
-```
-
-```bash
-#emulate app in simulator
-ionic emulate ios 
-ionic emulate android
+#list emulate for the platforms
+ionic cordova emulate --list
 ```
 
 ```bash
 #run app on emulate
-ionic run ios
-ionic run android 
+ionic cordova run ios --target="iPhone-8, 12.1" -- --buildFlag="-UseModernBuildSystem=0"
+ionic cordova run android
 ```
 
 ```bash
 #run app on device
-ionic run ios  --device
-ionic run android  --device
+ionic cordova run ios --device
+ionic cordova run android
 ```
 
 ```bash
 # run app on local browser
 ionic serve (localhost:8100)
 ```
+### Run Tests
+
+```bash
+#run tests
+karma start
+```
+
 
 ## Author
 
