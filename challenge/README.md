@@ -30,8 +30,6 @@ npm install -g karma
 
 ### Run App
 
-You can run the app in different ways:
-
 ```bash
 #configure platform targets
 ionic cordova platform add ios android
