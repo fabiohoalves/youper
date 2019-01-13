@@ -22,8 +22,8 @@ module.exports = function(config) {
         'lib/angular-animate/angular-animate.min.js',
         'lib/angular-sanitize/angular-sanitize.min.js',
         'lib/angular-ui-router/release/angular-ui-router.min.js',
-        'lib/angular-cache/dist/angular-cache.min.js',
-        'lib/angularfire/dist/angularfire.min.js',
+        'lib/angular-cache/angular-cache.min.js',
+        'lib/angularfire/angularfire.min.js',
         'lib/firebase/firebase.js',
 
         'app/firebase.key.js',
