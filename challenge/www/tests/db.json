@@ -1,19 +1,19 @@
 {
 
   "notifications" : {
-    "one" : {
+    "1" : {
      "title": "New feature 1!",
      "description": "Now you can customize your avatar uploading your selfie...",
      "information": "Just click on the avatar, take or select a picture and",
      "imageSrc": "example.jpeg",
      "labelButton": "Got it"},
-     "two" : {
+     "2" : {
       "title": "New feature 2!",
       "description": "Now you can customize your avatar uploading your selfie...",
       "information": "Just click on the avatar, take or select a picture and",
       "imageSrc": "example.jpeg",
       "labelButton": "Got it"},
-      "three" : {
+      "3" : {
         "title": "New feature 3!",
         "description": "Now you can customize your avatar uploading your selfie...",
         "information": "Just click on the avatar, take or select a picture and",

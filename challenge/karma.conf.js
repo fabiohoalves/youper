@@ -54,7 +54,9 @@ module.exports = function(config) {
         'karma-jasmine',
         'karma-mocha-reporter',
         'karma-phantomjs-launcher',
-        'karma-chrome-launcher'
+        'karma-chrome-launcher',
+        'karma-safari-launcher'
+
     ],
 
     // test results reporter to use
@@ -82,7 +84,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Safari'],
 
 
     // Continuous Integration mode
