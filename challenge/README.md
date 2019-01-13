@@ -42,7 +42,7 @@ ionic cordova emulate --list
 ```
 
 ```bash
-#run app on emulate
+#run app on emulate (if doesn't work remove -- --buildFlag="-UseModernBuildSystem=0" )
 ionic cordova emulate ios --target="iPhone-8, 12.1" -- --buildFlag="-UseModernBuildSystem=0" (if does not work, remove -- --buildFlag="-UseModernBuildSystem=0")
 ionic cordova emulate android
 ```
@@ -60,7 +60,8 @@ ionic serve (localhost:8100)
 ### Run Tests
 
 ```bash
-#run tests
+#run tests (Chrome is default browser)
+#if necessary change browser in Karma.conf.js -> browsers: ['Chrome'],
 karma start
 ```
 
