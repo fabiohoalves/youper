@@ -45,6 +45,10 @@ function NotificationService($firebaseArray, CacheFactory) {
         return (notificationsCache != undefined && notificationsCache.get(key) != undefined);
     }
 
+    function addImageCache(key, img) {
+         notificationsCache.put(key, img);
+    }
+
     function addItemCache(key) {
         if (!hasItemCache(key))
             notificationsCache.put(key, {read : false, date : new Date()});
@@ -53,6 +57,10 @@ function NotificationService($firebaseArray, CacheFactory) {
     function getValueCache(key, name) {
         if (hasItemCache(key))
             return notificationsCache.get(key)[name];
+    }
+
+    function getImageCache(key) {
+        return notificationsCache.get(key);
     }
 
     function removeItemCache(key) {
@@ -81,9 +89,11 @@ return {
 
         hasNotificationToRead: hasNotificationToRead,
         getValueCache: getValueCache,
+        getImageCache: getImageCache,
         hasItemCache: hasItemCache,
         updateItemCache: updateItemCache,
-        addItemCache: addItemCache
+        addItemCache: addItemCache,
+        addImageCache: addImageCache
     }
 };
 })()

@@ -8,8 +8,8 @@
             <h2>{{notification.title}}</h2>
             <h3>{{notification.description}}</h3>
             <h4>{{notification.information}}</h4>
-            <img class="item-img" src="../../img/example.png"/>
-            <button>{{notification.labelButton}}</button>
+            <img class="item-img" ng-src="{{imgURI}}"/>
+            <button ng-click="getNotifications()">{{notification.labelButton}}</button>
         </div>
     </ion-content>
 </ion-view>

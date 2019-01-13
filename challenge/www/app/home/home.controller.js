@@ -24,12 +24,15 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
         }
     }
 
-
     function download(){
+        var url;
         storage.ref().child(profilePath + $scope.getName() + ".jpeg").getDownloadURL().then(function(url) {
             loadPhotoProfile(url);
         }).catch(function(error) {
-            $scope.$log = error;
+           url = NotificationService.getImageCache($scope.getName());
+           if (url != undefined){
+               loadPhotoProfile(url);
+           }
         });
     }
 
@@ -40,6 +43,7 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
             $scope.imgURI = img;
             $scope.isPhoto = true;
         });
+        NotificationService.addImageCache($scope.getName(), img);
     }
 
     function handleFileSelect(evt) {
@@ -88,9 +92,11 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
             };
 
             $cordovaCamera.getPicture(options).then(function (imageData) {
-                $scope.imgURI = 'data:image/jpeg;base64,' + imageData;
+                var img = 'data:image/jpeg;base64,' + imageData
+                $scope.imgURI = img;
                 $scope.isPhoto = true;
-                upload('data:image/jpeg;base64,' + imageData);
+                upload(img);
+                NotificationService.saveImageCache($scope.getName(), img);
             }, function (err) {
                 $scope.$log = err;
             });
