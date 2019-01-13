@@ -1,0 +1,24 @@
+{
+
+  "notifications" : {
+    "four" : {
+     "title": "New feature 4!",
+     "description": "Now you can customize your avatar uploading your selfie...",
+     "information": "Just click on the avatar, take or select a picture and",
+     "imageSrc": "example.jpeg",
+     "labelButton": "Got it"},
+     "five" : {
+      "title": "New feature 5!",
+      "description": "Now you can customize your avatar uploading your selfie...",
+      "information": "Just click on the avatar, take or select a picture and",
+      "imageSrc": "example.jpeg",
+      "labelButton": "Got it"},
+      "six" : {
+        "title": "New feature 6!",
+        "description": "Now you can customize your avatar uploading your selfie...",
+        "information": "Just click on the avatar, take or select a picture and",
+        "imageSrc": "example.jpeg",
+        "labelButton": "Got it"}
+      }
+
+}
