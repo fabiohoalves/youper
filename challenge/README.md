@@ -23,6 +23,11 @@ npm install -g ionic cordova and karma
 npm install
 ```
 
+```bash
+#install of tests
+npm install -g karma
+```
+
 ### Run App
 
 You can run the app in different ways:
@@ -38,14 +43,14 @@ ionic cordova emulate --list
 
 ```bash
 #run app on emulate
-ionic cordova run ios --target="iPhone-8, 12.1" -- --buildFlag="-UseModernBuildSystem=0"
-ionic cordova run android
+ionic cordova emulate ios --target="iPhone-8, 12.1" -- --buildFlag="-UseModernBuildSystem=0" (if does not work, remove -- --buildFlag="-UseModernBuildSystem=0")
+ionic cordova emulate android
 ```
 
 ```bash
 #run app on device
 ionic cordova run ios --device
-ionic cordova run android
+ionic cordova run android --device
 ```
 
 ```bash

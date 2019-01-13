@@ -25,15 +25,15 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
     }
 
 
-    $scope.download = function(){
-        storage.ref().child(profilePath + $scope.getName() + ".png").getDownloadURL().then(function(url) {
+    function download(){
+        storage.ref().child(profilePath + $scope.getName() + ".jpeg").getDownloadURL().then(function(url) {
             loadPhotoProfile(url);
         }).catch(function(error) {
             $scope.$log = error;
         });
     }
 
-    $scope.download();
+    download();
 
     function loadPhotoProfile(img){
         $scope.$apply(function() {
@@ -54,12 +54,12 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
         // Closure to capture the file information.
         reader.onloadend = function(e) {
             loadPhotoProfile(reader.result);
-            $scope.upload(reader.result);
+            upload(reader.result);
         };
     }
 
-    $scope.upload = function(img) {
-        var photoRef = storage.ref().child(profilePath + $scope.getName() + ".png");
+    function upload(img) {
+        var photoRef = storage.ref().child(profilePath + $scope.getName() + ".jpeg");
         photoRef.putString(img, 'data_url').then(function(snapshot) {
 
         }, function (err) {
@@ -80,16 +80,17 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: true,
-                encodingType: Camera.EncodingType.PNG,
-                targetWidth: 48,
-                targetHeight: 48,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 36,
+                targetHeight: 36,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
 
             $cordovaCamera.getPicture(options).then(function (imageData) {
-                loadPhotoProfile('data:image/png;base64,' + imageData);
-                $scope.upload('data:image/png;base64,' + imageData);
+                $scope.imgURI = 'data:image/jpeg;base64,' + imageData;
+                $scope.isPhoto = true;
+                upload('data:image/jpeg;base64,' + imageData);
             }, function (err) {
                 $scope.$log = err;
             });
@@ -101,6 +102,10 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
 
     $scope.hasNotificationToRead = function () {
         return NotificationService.hasNotificationToRead();
+    }
+    return {
+        download: download,
+        upload: upload
     }
 }
 })();

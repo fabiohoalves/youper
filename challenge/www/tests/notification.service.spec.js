@@ -70,12 +70,6 @@ describe("Testing Notification Service", function() {
         });
     });
 
-    describe("NotificationService Firebase", function() {
-
-        ///
-
-    });
-
 });
 
 
