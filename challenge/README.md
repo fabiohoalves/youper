@@ -40,8 +40,9 @@ ionic cordova emulate --list
 ```
 
 ```bash
-#run app on emulate (if doesn't work remove -- --buildFlag="-UseModernBuildSystem=0" )
-ionic cordova emulate ios --target="iPhone-8, 12.1" -- --buildFlag="-UseModernBuildSystem=0" ionic cordova emulate android
+#run app on emulate (build Ionic Cordova with Xcode 10 -- --buildFlag="-UseModernBuildSystem=0" )
+#ionic info (more information)
+ionic cordova emulate ios
 ```
 
 ```bash

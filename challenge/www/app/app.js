@@ -23,8 +23,8 @@ angular.module('starter', ['ionic','ngCordova', 'home', 'notifications', 'servic
       // Set the statusbar to use the default style, tweak this to
       // remove the status bar on iOS or change it to use white instead of dark colors.
   //    StatusBar.styleDefault();
+     //   StatusBar.styleLightContent();
     }
    });
-
    CacheFactory.createCache("notificationsCache", {storageMode: "localStorage"});
 });

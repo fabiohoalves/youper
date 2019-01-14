@@ -29,10 +29,7 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
         storage.ref().child(profilePath + $scope.getName() + ".jpeg").getDownloadURL().then(function(url) {
             loadPhotoProfile(url);
         }).catch(function(error) {
-           url = NotificationService.getImageCache($scope.getName());
-           if (url != undefined){
-               loadPhotoProfile(url);
-           }
+          //
         });
     }
 
