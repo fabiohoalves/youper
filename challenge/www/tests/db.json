@@ -5,19 +5,19 @@
      "title": "New feature 1!",
      "description": "Now you can customize your avatar uploading your selfie...",
      "information": "Just click on the avatar, take or select a picture and",
-     "imageSrc": "example.jpeg",
+     "imageSrc": "example.png",
      "labelButton": "Got it"},
      "2" : {
       "title": "New feature 2!",
       "description": "Now you can customize your avatar uploading your selfie...",
       "information": "Just click on the avatar, take or select a picture and",
-      "imageSrc": "example.jpeg",
+      "imageSrc": "example.png",
       "labelButton": "Got it"},
       "3" : {
         "title": "New feature 3!",
         "description": "Now you can customize your avatar uploading your selfie...",
         "information": "Just click on the avatar, take or select a picture and",
-        "imageSrc": "example.jpeg",
+        "imageSrc": "example.png",
         "labelButton": "Got it"}
       }
 

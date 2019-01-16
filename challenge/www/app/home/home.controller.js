@@ -26,7 +26,7 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
 
     function download(){
         var url;
-        storage.ref().child(profilePath + $scope.getName() + ".jpeg").getDownloadURL().then(function(url) {
+        storage.ref().child(profilePath + $scope.getName() + ".png").getDownloadURL().then(function(url) {
             loadPhotoProfile(url);
         }).catch(function(error) {
           //
@@ -60,7 +60,7 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
     }
 
     function upload(img) {
-        var photoRef = storage.ref().child(profilePath + $scope.getName() + ".jpeg");
+        var photoRef = storage.ref().child(profilePath + $scope.getName() + ".png");
         photoRef.putString(img, 'data_url').then(function(snapshot) {
 
         }, function (err) {
@@ -81,7 +81,7 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
+                encodingType: Camera.EncodingType.PNG,
                 targetWidth: 36,
                 targetHeight: 36,
                 popoverOptions: CameraPopoverOptions,
@@ -89,7 +89,7 @@ function HomeController($scope, $state, NotificationService, $cordovaCamera, $io
             };
 
             $cordovaCamera.getPicture(options).then(function (imageData) {
-                var img = 'data:image/jpeg;base64,' + imageData
+                var img = 'data:image/png;base64,' + imageData
                 $scope.imgURI = img;
                 $scope.isPhoto = true;
                 upload(img);
